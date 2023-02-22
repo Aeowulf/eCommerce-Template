@@ -61,5 +61,6 @@ const productSchema = mongoose.Schema({
 })
 
 const Product = mongoose.model('Product', productSchema)
+// "Product" creates a collection with a name of "Product", using the productSchema specified above, returning the Mongoose object
 
 export default Product
