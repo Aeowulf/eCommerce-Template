@@ -3,10 +3,12 @@ import { Link, useParams, useNavigate, useLocation } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { Row, Col, ListGroup, Image, Form, Button, Card } from 'react-bootstrap'
 import Message from '../components/Message'
-import { addToCart } from '../actions/cartActions'
+import { addToCart, removeFromCart } from '../actions/cartActions'
 
-const CartScreen = ({history}) => {
+const CartScreen = () => {
   const { productId } = useParams();
+
+  const history = useNavigate();
 
   const location = useLocation();
 
@@ -24,8 +26,14 @@ const CartScreen = ({history}) => {
   }, [dispatch, productId, qty])
 
   const removeFromCartHandler = (id) => {
-    console.log('Removed')
+    dispatch(removeFromCart(id))
   }
+
+  const checkoutHandler = () => {
+    history('/login?redirect=shipping')
+    {/* Redirects to Shipping screen if user is logged in, otherwise redirects to Login screen */}
+  }
+  {/* Defining checkoutHandler ahead of time to ensure Checkout button below works properly */}
 
   return (<Row>
     <Col md={8}>
@@ -83,7 +91,21 @@ const CartScreen = ({history}) => {
       <Card>
         <ListGroup variant='flush'>
           <ListGroup.Item>
-            <h2>Subtotal ({cartItems.reduce((acc, item) => acc + item.qty, 0)}) items</h2>
+            <h2>
+              Subtotal ({cartItems.reduce((acc, item) => acc + item.qty, 0)}) items
+            </h2>
+            {/* Adds up the "qty" of every "item" in "cartItems" to render the total quantity of items in Shopping Cart */}
+
+            ${cartItems.reduce((acc, item) => acc + item.qty * item.price, 0).toFixed(2)}
+            {/* Adds up the "price" of every "item" in "cartItems" to render the total price of items in Shopping Cart */}
+            {/* The ".toFixed()" method converts a number to a string, rounding it to a specified number of decimals; in this case, 2. */}
+          </ListGroup.Item>
+
+          <ListGroup.Item>
+            <Button type='button' className='btn-block' disabled={cartItems.length === 0} onClick={checkoutHandler}>
+              Proceed To Checkout
+            </Button>
+            {/* Created a button that calls the "checkoutHandler" function when clicked. Button is Disabled if cart is empty. */}
           </ListGroup.Item>
         </ListGroup>
       </Card>
