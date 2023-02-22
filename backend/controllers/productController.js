@@ -7,7 +7,6 @@ import Product from '../models/productModel.js'
 // @access  Public
 
 const getProducts = asyncHandler(async (req, res) => {
-// Async function takes in a request and response
   const products = await Product.find({})
   // Not entirely sure what this does. I think it makes getProducts wait for Product.find to return the object it's looking for? Then assigns it to "products"?
   // More research into asynchronous JavaScript needed.
