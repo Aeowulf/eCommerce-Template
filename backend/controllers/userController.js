@@ -1,6 +1,9 @@
 // Copy and pasted productController.js to get started
 
 import asyncHandler from 'express-async-handler'
+
+import generateToken from '../utils/generateToken.js'
+
 import User from '../models/userModel.js'
 
 
@@ -22,8 +25,8 @@ const authUser = asyncHandler(async (req, res) => {
       name: user.name,
       email: user.email,
       isAdmin: user.isAdmin,
-      token: null
-      // Haven't added token functionality yet
+      token: generateToken(user._id),
+      // Added generateToken()
     })
   } else/* if user is not found or password doesn't match*/{
       res.status(401)
