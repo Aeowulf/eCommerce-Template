@@ -1,0 +1,17 @@
+Front End User Authentication & Profile
+  User Login Reducer & Action 
+    Created userConstants.js
+      REQUEST
+      SUCCESS
+      FAIL
+      LOGOUT
+    Created userReducers.js
+      Created userLoginReducer
+        Using imported userConstants
+    Imported userLoginReducer to store.js
+      Added to combined reducer
+    Created userActions.js
+      Created login function
+    Added userInfo (from userActions.js) to store.js
+    Added userInfoFromStorage to initialState
+
