@@ -24,3 +24,19 @@ h3 {
 .rating span {
   margin: 0.1rem;
 }
+
+.margin-top-1rem {
+  margin-top: 1rem;
+}
+
+.margin-top-point5rem {
+  margin-top: 0.5rem;
+}
+
+.margin-top-1point5rem {
+  margin-top: 1.5rem;
+}
+
+.text-decoration-line-none {
+  text-decoration-line: none;
+}
