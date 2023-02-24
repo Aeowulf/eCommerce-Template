@@ -24,3 +24,8 @@ Front End User Authentication & Profile
     Created Route to LoginScreen
     Added CSS styles to LoginScreen elements
     Added submitHandler
+
+  Show User in Navbar & Logout
+    Added Navbar dropdown menu for when user in logged in
+
+END OF DEV LOG, STILL PROGRAMMING, JUST IN A RUSH
