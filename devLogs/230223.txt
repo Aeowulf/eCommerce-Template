@@ -1,0 +1,31 @@
+Front End User Authentication & Profile
+
+  User Login Reducer & Action 
+    Created userConstants.js
+      REQUEST
+      SUCCESS
+      FAIL
+      LOGOUT
+    Created userReducers.js
+      Created userLoginReducer
+        Using imported userConstants
+    Imported userLoginReducer to store.js
+      Added to combined reducer
+    Created userActions.js
+      Created login function
+    Added userInfo (from userActions.js) to store.js
+    Added userInfoFromStorage to initialState
+
+  User Login Screen & Functionality
+    Created LoginScreen.js
+    Created FormContainer.js component
+    Added FormContainer.js to LoginScreen.js
+      Built Form within FormContainer
+    Created Route to LoginScreen
+    Added CSS styles to LoginScreen elements
+    Added submitHandler
+
+  Show User in Navbar & Logout
+    Added Navbar dropdown menu for when user in logged in
+
+END OF DEV LOG, STILL PROGRAMMING, JUST IN A RUSH
