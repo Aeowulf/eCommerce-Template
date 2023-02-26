@@ -30,57 +30,37 @@ const PaymentScreen = () => {
   }
 
   return <FormContainer>
-    <CheckoutSteps step1 step2 />
+    <CheckoutSteps step1 step2 step3 />
 
-    <h1>Shipping</h1>
+    <h1>Payment Method</h1>
 
     <Form onSubmit={submitHandler}>
-      <Form.Group controlId='address'>
-        <Form.Label>Address</Form.Label>
+      <Form.Group>
+        <Form.Label as='legend'>Select Method</Form.Label>
 
-        <Form.Control 
-          type='text' 
-          placeholder='Enter address' 
-          value={address}
-          required
-          onChange={(e) => setAddress(e.target.value)}
-        ></Form.Control>
-      </Form.Group>
+        <Col>
+          <Form.Check 
+            type      = 'radio' 
+            label     = 'Paypal or Credit' 
+            id        = 'PayPal' 
+            name      = 'paymentMethod'
+            value     = 'PayPal'
+            checked 
+            onChange  = {(e) => setPaymentMethod(e.target.value)}
+          >
+          </Form.Check>
 
-      <Form.Group controlId='city'>
-        <Form.Label className='margin-top-1rem'>City</Form.Label>
-
-        <Form.Control 
-          type='text' 
-          placeholder='Enter city' 
-          value={city}
-          required
-          onChange={(e) => setCity(e.target.value)}
-        ></Form.Control>
-      </Form.Group>
-
-      <Form.Group controlId='postalCode'>
-        <Form.Label className='margin-top-1rem'>Postal Code</Form.Label>
-
-        <Form.Control 
-          type='text' 
-          placeholder='Enter postal code' 
-          value={postalCode}
-          required
-          onChange={(e) => setPostalCode(e.target.value)}
-        ></Form.Control>
-      </Form.Group>
-
-      <Form.Group controlId='country'>
-        <Form.Label className='margin-top-1rem'>Country</Form.Label>
-
-        <Form.Control
-          type='text' 
-          placeholder='Enter country' 
-          value={country}
-          required
-          onChange={(e) => setCountry(e.target.value)}
-        ></Form.Control>
+          {/* <Form.Check
+            className="margin-top-1rem" 
+            type      = 'radio' 
+            label     = 'Stripe' 
+            id        = 'Stripe' 
+            name      = 'paymentMethod'
+            value     = 'Stripe'
+            onChange  = {(e) => setPaymentMethod(e.target.value)}
+          >
+          </Form.Check> */}
+        </Col>
       </Form.Group>
 
       <Button type='submit' variant='primary' className='margin-top-1rem'>
