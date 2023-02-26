@@ -7,6 +7,7 @@ import connectDB from './config/db.js'
 
 import productRoutes from './routes/productRoutes.js'
 import userRoutes from './routes/userRoutes.js'
+import orderRoutes from './routes/orderRoutes.js'
 
 dotenv.config()
 
@@ -25,6 +26,7 @@ app.use('/api/products', productRoutes)
 
 app.use('/api/users', userRoutes)
 // Puts the userRoutes function at /users path; only executes when the base of the requested path matches the specified path
+app.use('/api/orders', orderRoutes)
 
 app.use(notFound)
 
