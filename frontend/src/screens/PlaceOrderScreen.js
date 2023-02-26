@@ -9,7 +9,9 @@ import { createOrder } from '../actions/orderActions'
 const PlaceOrderScreen = () => {
   const dispatch = useDispatch()
 
-  const cart = useSelector(state => state.cart)
+  const cart = useSelector((state) => state.cart)
+
+  console.log(cart)
 
   // Calculate prices
   const addDecimals = (num) => {
@@ -19,7 +21,8 @@ const PlaceOrderScreen = () => {
   cart.itemsPrice = addDecimals(
     cart.cartItems.reduce((acc, item) => acc + item.price * item.qty, 0)
   )
-  cart.shippingPrice = addDecimals(cart.itemsPrice > 100 ? 0 : 100)
+
+  cart.shippingPrice = addDecimals(cart.itemsPrice > 100 ? 0 : 10)
 
   cart.taxPrice = addDecimals(Number((0.15 * cart.itemsPrice).toFixed(2)))
   
@@ -29,7 +32,7 @@ const PlaceOrderScreen = () => {
     Number(cart.taxPrice)
   ).toFixed(2)
 
-  const orderCreate = useSelector(state => state.orderCreate)
+  const orderCreate = useSelector((state) => state.orderCreate)
   const { order, success, error } = orderCreate
 
   const history = useNavigate()
@@ -39,7 +42,7 @@ const PlaceOrderScreen = () => {
       history(`/order/${order._id}`)
     }
     // eslint-disable-next-line
-  }, [history, success])
+  }, [history, success, order, dispatch])
 
   const placeOrderHandler = () => {
     dispatch(
@@ -84,7 +87,7 @@ const PlaceOrderScreen = () => {
             <h2>Order Items</h2>
 
             {cart.cartItems.length === 0 
-              ? <Message>Your cart is empty.</Message>
+              ? (<Message>Your cart is empty.</Message>)
               : (
                 <ListGroup variant='flush'>
                   {cart.cartItems.map((item, index) => (
