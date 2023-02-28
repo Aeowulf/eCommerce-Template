@@ -6,7 +6,6 @@ import generateToken from '../utils/generateToken.js'
 
 import User from '../models/userModel.js'
 
-
 // @desc    Auth user & get token
 // @route   POST /api/users/login
 // @access  Public
@@ -18,7 +17,10 @@ const authUser = asyncHandler(async (req, res) => {
   const user = await User.findOne({ email })
   // Find one user document by email that matches email requested above
 
-  if(user/* exists */ && (await user.matchPassword(password))/* password matches */) {
+  if (
+    user /* exists */ &&
+    (await user.matchPassword(password)) /* password matches */
+  ) {
     // Return the following JSON data
     res.json({
       _id: user._id,
@@ -28,11 +30,11 @@ const authUser = asyncHandler(async (req, res) => {
       token: generateToken(user._id),
       // Added generateToken()
     })
-  } else/* if user is not found or password doesn't match*/{
-      res.status(401)
-      // Return "Unauthorized" error
-      throw new Error('Invalid email or password')
-      // Throw error message
+  } /* if user is not found or password doesn't match*/ else {
+    res.status(401)
+    // Return "Unauthorized" error
+    throw new Error('Invalid email or password')
+    // Throw error message
   }
 })
 
@@ -55,21 +57,21 @@ const registerUser = asyncHandler(async (req, res) => {
   const user = await User.create({
     name,
     email,
-    password
+    password,
   })
 
   if (user) {
-      res.status(201).json({
-        _id:      user._id                ,
-        name:     user.name               ,
-        email:    user.email              ,
-        isAdmin:  user.isAdmin            ,
-        token:    generateToken(user._id) ,
-      })
+    res.status(201).json({
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+      isAdmin: user.isAdmin,
+      token: generateToken(user._id),
+    })
   } else {
-      res.status(400)
+    res.status(400)
 
-      throw new Error('Invalid user data')
+    throw new Error('Invalid user data')
   }
 })
 
@@ -81,15 +83,15 @@ const getUserProfile = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user._id)
 
   if (user) {
-      res.json({
-        _id:      user._id    ,
-        name:     user.name   ,
-        email:    user.email  ,
-        isAdmin:  user.isAdmin,
-      })
+    res.json({
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+      isAdmin: user.isAdmin,
+    })
   } else {
-      res.status(404)
-      throw new Error('User not found')
+    res.status(404)
+    throw new Error('User not found')
   }
 })
 
@@ -101,26 +103,26 @@ const updateUserProfile = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user._id)
 
   if (user) {
-      user.name = req.body.name || user.name
+    user.name = req.body.name || user.name
 
-      user.email = req.body.email || user.email
+    user.email = req.body.email || user.email
 
-      if (req.body.password) {
-        user.password = req.body.password
-      }
+    if (req.body.password) {
+      user.password = req.body.password
+    }
 
-      const updatedUser = await user.save()
+    const updatedUser = await user.save()
 
-      res.json({
-        _id: updatedUser._id,
-        name: updatedUser.name,
-        email: updatedUser.email,
-        isAdmin: updatedUser.isAdmin,
-        token: generateToken(updatedUser._id),
-      })
+    res.json({
+      _id: updatedUser._id,
+      name: updatedUser.name,
+      email: updatedUser.email,
+      isAdmin: updatedUser.isAdmin,
+      token: generateToken(updatedUser._id),
+    })
   } else {
-      res.status(404)
-      throw new Error('User not found')
+    res.status(404)
+    throw new Error('User not found')
   }
 })
 
@@ -134,4 +136,29 @@ const getUsers = asyncHandler(async (req, res) => {
   res.json(users)
 })
 
-export { authUser, registerUser, getUserProfile, updateUserProfile, getUsers }
+// @desc    Delete user
+// @route   DELETE /api/users/:id
+// @access  Private/Admin
+
+const deleteUser = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.params.id)
+
+  if (user) {
+    await user.remove()
+
+    res.json({ message: 'User removed' })
+  } else {
+    res.status(404)
+
+    throw new Error('User not found')
+  }
+})
+
+export {
+  authUser,
+  registerUser,
+  getUserProfile,
+  updateUserProfile,
+  getUsers,
+  deleteUser,
+}
