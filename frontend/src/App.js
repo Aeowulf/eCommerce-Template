@@ -13,6 +13,11 @@ import ShippingScreen from './screens/ShippingScreen'
 import PaymentScreen from './screens/PaymentScreen'
 import PlaceOrderScreen from './screens/PlaceOrderScreen'
 import OrderScreen from './screens/OrderScreen'
+import UserListScreen from './screens/UserListScreen'
+import UserEditScreen from './screens/UserEditScreen'
+import ProductListScreen from './screens/ProductListScreen'
+import ProductEditScreen from './screens/ProductEditScreen'
+import OrderListScreen from './screens/OrderListScreen'
 
 const App = () => {
   return (
@@ -39,16 +44,29 @@ const App = () => {
             <Route path='/profile' element={<ProfileScreen />} />
 
             <Route path='/shipping' element={<ShippingScreen />} />
-            
+
             {/* The route above isn't working properly, possibly due to use of React Router Dom V6's updated useNavigate function, which is being used in the CartScreen instead of the outdated "history" prop. Will look into this later, right now I'll fix the issue with the route path specified below. */}
 
             <Route path='/login/shipping' element={<ShippingScreen />} />
 
             <Route path='/payment' element={<PaymentScreen />} />
-            
+
             <Route path='/placeorder' element={<PlaceOrderScreen />} />
 
             <Route path='/order/:id' element={<OrderScreen />} />
+
+            <Route path='/admin/userlist' element={<UserListScreen />} />
+
+            <Route path='/admin/user/:id/edit' element={<UserEditScreen />} />
+
+            <Route path='/admin/productlist' element={<ProductListScreen />} />
+
+            <Route path='/admin/orderlist' element={<OrderListScreen />} />
+
+            <Route
+              path='/admin/product/:id/edit'
+              element={<ProductEditScreen />}
+            />
           </Routes>
         </Container>
       </main>
@@ -58,4 +76,4 @@ const App = () => {
   )
 }
 
-export default App;
+export default App
