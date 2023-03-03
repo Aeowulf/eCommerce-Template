@@ -6,9 +6,16 @@ import Product from '../models/productModel.js'
 // @access  Public
 
 const getProducts = asyncHandler(async (req, res) => {
-  const products = await Product.find({})
-  // Not entirely sure what this does. I think it makes getProducts wait for Product.find to return the object it's looking for? Then assigns it to "products"?
-  // More research into asynchronous JavaScript needed.
+  const keyword = req.query.keyword
+    ? {
+        name: {
+          $regex: req.query.keyword,
+          $options: 'i',
+        },
+      }
+    : {}
+
+  const products = await Product.find({ ...keyword })
 
   res.json(products)
   // Responds with JSON-ified products

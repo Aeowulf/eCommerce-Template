@@ -33,6 +33,8 @@ const App = () => {
               Had to use "element" instead of "component"
               Had to format "HomeScreen" as an element
             */}
+            <Route path='/search/:keyword' element={<HomeScreen />} />
+
             <Route path='/product/:id' element={<ProductScreen />} />
 
             <Route path='/cart/:productId?' element={<CartScreen />} />
