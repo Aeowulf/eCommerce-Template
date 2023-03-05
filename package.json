@@ -1,7 +1,11 @@
 {
-  "name": "proshop",
+  "name": "ecommercetemplate",
   "version": "1.0.0",
-  "description": "MERN shopping cart app",
+  "description": "MERN eCommerce Template",
+  "engines": {
+    "node":"19.x",
+    "npm":"9.x"
+  },
   "main": "server.js",
   "type": "module",
   "scripts": {
