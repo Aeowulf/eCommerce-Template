@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "MERN eCommerce Template",
   "engines": {
-    "node":"19.x",
-    "npm":"9.x"
+    "node": "19.x",
+    "npm": "9.x"
   },
   "main": "server.js",
   "type": "module",
@@ -29,6 +29,7 @@
     "mongoose": "^6.9.1",
     "morgan": "^1.10.0",
     "multer": "^1.4.5-lts.1",
+    "react-router-dom": "^6.8.2",
     "react-scripts": "^5.0.1"
   },
   "devDependencies": {
